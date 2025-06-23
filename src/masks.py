@@ -1,8 +1,10 @@
 def get_mask_card_number(card_number: str) -> str:
     """Функция, которая добавляет пробелы и  меняет цифры в номере карты
     на звездочки"""
-
-    card_number_star = card_number[:4] + " " + card_number[5:7] + "** **** " + card_number[-4:]
+    if len(card_number) == 16 or len(card_number) != '':
+        card_number_star = card_number[:4] + " " + card_number[4:6] + "** **** " + card_number[-4:]
+    else:
+        print('Введен некорректный номер карты')
 
     return card_number_star
 
