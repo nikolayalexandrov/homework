@@ -10,14 +10,16 @@ def mask_account_card(user_details: str) -> str:
     for symbol in user_details:
         if symbol.isdigit():
             number += symbol
-        elif symbol.isalpha():
+        elif not symbol.isdigit():
             word += symbol
     if len(number) == 16:
         number_mask = get_mask_card_number(number)
     else:
         number_mask = get_mask_account(number)
-
-    disguise_user_details = word + " " + number_mask
+    if word[-1] == " ":
+        disguise_user_details = word[:-1] + " " + number_mask
+    else:
+        disguise_user_details = word + " " + number_mask
 
     return disguise_user_details
 
