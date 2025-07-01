@@ -17,7 +17,7 @@ def card_number_generator(start = 1, stop = 9999999999999999 ) -> Iterable:
     for gen_num in range(start, stop):
         len_numbers = 16 - len(str(gen_num))
         if len(str(gen_num)) <= 16:
-            card_number_gen = ('0' * len_numbers) + str(gen_num)\
+            card_number_gen = ('0' * len_numbers) + str(gen_num)
             card_number = card_number_gen[:4] + " " + card_number_gen[4:8] + " " + card_number_gen[8:12] + " "+ card_number_gen[-4:]
             yield card_number
         else:
