@@ -6,7 +6,7 @@ def filter_by_currency(transactions_filter: list, currency: str) -> Iterable:
     где валюта операции соответствует заданной"""
     if currency == "":
         yield "Нет заданной валюты"
-    if transactions_filter == list():
+    if transactions_filter == list([]):
         yield "Список пуст"
     else:
         for meaning_filter in transactions_filter:

@@ -134,7 +134,7 @@ def test_filter_by_currency_1() -> None:
         },
     ]
 
-    result = list(filter_by_currency(transactions, "RUB"))
+    result_1 = list(filter_by_currency(transactions, "RUB"))
     expected = [
         {
             "id": 873106923,
@@ -156,11 +156,11 @@ def test_filter_by_currency_1() -> None:
         }
     ]
 
-    assert result == expected
+    assert result_1 == expected
 
 
-def test_filter_by_currency_1() -> None:
-    transactions_1 = list()
+def test_filter_by_currency_2() -> None:
+    transactions_1 = list([])
     result = filter_by_currency(transactions_1, "USD")
     expected_1 = "Список пуст"
     assert next(iter(result)) == expected_1
