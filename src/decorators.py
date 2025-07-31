@@ -1,18 +1,13 @@
 import datetime
 import logging
 from functools import wraps
-from typing import Optional, Callable, Any
+from typing import Any, Callable, Optional
 
 
 def log(filename: Optional[str] = None) -> Callable:
     """
-    Декоратор для логирования выполнения функций
-
-    Args:
-        filename: Путь к файлу для записи логов. Если None - вывод в консоль.
-
-    Returns:
-        Декоратор для функции
+    Декоратор, который будет автоматически логировать начало и конец выполнения функции,
+ а также ее результаты или возникшие ошибки.
     """
 
     def decorator(func: Callable) -> Callable:
@@ -22,13 +17,12 @@ def log(filename: Optional[str] = None) -> Callable:
             logger.setLevel(logging.INFO)
 
             if filename:
-                handler = logging.FileHandler(filename, mode='a', encoding='utf-8')
+                handler = logging.FileHandler(filename, mode="a", encoding="utf-8")
             else:
                 handler = logging.StreamHandler()
 
             formatter = logging.Formatter(
-                fmt='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                datefmt='%Y-%m-%d %H:%M:%S'
+                fmt="%(asctime)s - %(name)s - %(levelname)s - %(message)s", datefmt="%Y-%m-%d %H:%M:%S"
             )
             handler.setFormatter(formatter)
             logger.addHandler(handler)
@@ -51,7 +45,7 @@ def log(filename: Optional[str] = None) -> Callable:
                 logger.error(
                     f"Ошибка выполнения функции: {type(e).__name__}: {str(e)}. "
                     f"Время выполнения до ошибки: {duration.total_seconds():.3f} секунд",
-                    exc_info=True
+                    exc_info=True,
                 )
                 raise
 
@@ -61,4 +55,3 @@ def log(filename: Optional[str] = None) -> Callable:
         return wrapper
 
     return decorator
-
