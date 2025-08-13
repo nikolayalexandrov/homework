@@ -38,15 +38,12 @@ print(filter_by_state(state_use))
 sort_date = input("Введите данные: ")
 print(sort_by_date(sort_date))
 
-# Пример использования
 @log("mylog.txt")  # Логи в файл
 def calculate_division(a: int, b: int) -> float:
-    """Пример функции с логированием"""
     return a / b
 
 @log()  # Логи в консоль
 def calculate_sum(a: int, b: int) -> int:
-    """Другая функция с логированием"""
     return a + b
 
 result = calculate_division(4, 2)
