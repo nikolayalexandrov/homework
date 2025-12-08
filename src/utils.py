@@ -11,5 +11,5 @@ def load_transactions(file_path):
         return data
     except Exception as e:
         print (e)
-#print(load_transactions('C:\\Users\\energ\\OneDrive\\Рабочий стол\\SkyPro\\PythonProject\\data\\operations.json'))
+print(load_transactions('C:\\Users\\energ\\OneDrive\\Рабочий стол\\SkyPro\\PythonProject\\data\\operations.json'))
 
