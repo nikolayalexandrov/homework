@@ -15,10 +15,15 @@ def pay_transactions(transaction: dict) -> float:
     try:
 
         if transaction['operationAmount']['currency']['code'] == 'RUB':
-            return f'Сумма: {transaction['operationAmount']['amount']} RUB'
+            return transaction['operationAmount']['amount']
         else:
             code_amount = transaction['operationAmount']['currency']['code']
-            sum_amount = transaction['operationAmount']['amount']
+
+            try:
+                sum_amount = transaction['operationAmount']['amount']
+            except KeyError:
+                print("Ключ 'amount' не найден в словаре.")
+
             from_conv_amount = 'RUB'
 
             print(f'сумма и валюта для конвертации: {sum_amount} {code_amount}')
@@ -28,15 +33,17 @@ def pay_transactions(transaction: dict) -> float:
             headers = {"apikey": API_KEY}
 
             response = requests.get(conv_amount, headers=headers)
+            if response.status_code == 200:
+                data = json.loads(response.text)
+                sum_conv = float(data['result'])
 
-            data = json.loads(response.text)
-            sum_conv = data['result']
+                print('Сумма после конвертации в RUB:')
 
+            return sum_conv
 
-        return f'Сумма после конвертации: {sum_conv} RUB'
 
     except Exception as e:
-        print (e)
+        print(e)
 
 
 val = {
@@ -47,7 +54,7 @@ val = {
       "amount": "31957.58",
       "currency": {
         "name": "руб.",
-        "code": "EUR"
+        "code": "USD"
       }
     }}
 
