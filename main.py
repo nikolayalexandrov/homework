@@ -12,6 +12,8 @@ from src.processing import filter_by_state
 
 from src.processing import sort_by_date
 
+from src.decorators import log
+
 #маскируем номер карты
 card_number = input("ВВедите номере карты: ")
 print(get_mask_card_number(card_number))
@@ -35,3 +37,14 @@ print(filter_by_state(state_use))
 #сортируем по дате
 sort_date = input("Введите данные: ")
 print(sort_by_date(sort_date))
+
+@log("mylog.txt")  # Логи в файл
+def calculate_division(a: int, b: int) -> float:
+    return a / b
+
+@log()  # Логи в консоль
+def calculate_sum(a: int, b: int) -> int:
+    return a + b
+
+result = calculate_division(4, 2)
+print(result)
